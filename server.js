@@ -223,7 +223,7 @@ app.get('/calculateRank', async (req, res) => {
     if (!studentData) {
       // Fetch GPA data for all students in the range
       const fetchStudentData = async (num) => {
-        const url = `http://localhost:3000/rankresults?stnum=${num}&rlevel=4`;
+        const url = `https://rank-proxy.onrender.com/rankresults?stnum=${num}&rlevel=4`;
         const response = await fetch(url);
         return { num, data: await response.json() }; // Return an object containing the student number and data
       };
