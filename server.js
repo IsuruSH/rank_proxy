@@ -214,7 +214,7 @@ app.get('/calculateRank', async (req, res) => {
     const endNumInt = parseInt(endnum);
     const stNumInt = parseInt(stnum);
 
-    console.log(stNumInt)
+    console.log(`${startNumInt}-${endNumInt}: ${stNumInt}`)
   
     // Define cache key based on range and gpatype
     const cacheKey = `${startnum}-${endnum}-${gpatype}`;
