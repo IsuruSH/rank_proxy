@@ -93,18 +93,18 @@ Example Response:
   "averageGpa": 3.50
 }
 ```
-Special Cases
-No Access Students
+# Special Cases
+## No Access Students
 If a student number is in the noAccessStnum array, they will receive a "No access" notification. Add student numbers to the array as needed.
 
-Deceased Students
+## Deceased Students
 If a student number is in the deceasedStnum array, the API will respond with "Rest in Peace." Add student numbers to the array as needed.
 
-Non-Credit Subjects
+## Non-Credit Subjects
 Subjects listed in the nonCreditSubjects array will not be considered in the GPA calculation. This ensures that only credit-bearing subjects are included.
 
-Caching
+## Caching
 The API uses node-cache to cache the rank results for 1000 seconds to reduce load on the server when multiple requests are made for the same student range and GPA type.
 
-License
+## License
 This project is licensed under the MIT License.
