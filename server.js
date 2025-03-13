@@ -276,6 +276,7 @@ app.get("/creditresults", async (req, res) => {
   const phpsessid =
     authHeader && authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
+  console.log(stnum, rlevel, phpsessid);
   const strippedStnum = stnum.startsWith(0) ? stnum.slice(1) : stnum;
 
   // Check if the stripped student number is in the no access list
