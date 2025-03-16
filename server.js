@@ -380,6 +380,8 @@ app.get("/creditresults", async (req, res) => {
       }
     });
 
+    console.log(latestAttempts);
+
     for (const [subjectCode, { grade, year }] of Object.entries(
       latestAttempts
     )) {
