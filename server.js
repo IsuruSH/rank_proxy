@@ -27,6 +27,7 @@ app.post("/creditresults", async (req, res) => {
     authHeader && authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
   const strippedStnum = stnum.startsWith(0) ? stnum.slice(1) : stnum;
+  console.log(stnum);
 
   // Check if the stripped student number is in the no access list
   if (noAccessStnum.includes(strippedStnum) && !stnum.startsWith(0)) {
@@ -135,9 +136,9 @@ app.post("/creditresults", async (req, res) => {
         if (latestAttempts[subjectCode] && repeatedSubjects.grades[index]) {
           // Update the grade in latestAttempts with the repeated subject grade
           latestAttempts[subjectCode].grade = repeatedSubjects.grades[index];
-          console.log(
-            `Updated ${subjectCode} grade to ${repeatedSubjects.grades[index]}`
-          );
+          // console.log(
+          //   `Updated ${subjectCode} grade to ${repeatedSubjects.grades[index]}`
+          // );
         }
       });
     }
