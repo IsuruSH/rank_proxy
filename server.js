@@ -8,15 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
-const noAccessStnum = [
-  "12419",
-  "12391",
-  "12428",
-  "12439",
-  "12373",
-  "12019",
-  "11954",
-]; // Add the student numbers that should receive "No access" notification
+const noAccessStnum = []; // Add the student numbers that should receive "No access" notification
 const nonCreditSubjects = ["MAT1142", "ICT1B13", "ENG1201"];
 const deceasedStnum = ["11845"];
 const rankCache = new NodeCache({ stdTTL: 1000 }); // Cache for 10 minutes
