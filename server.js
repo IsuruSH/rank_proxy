@@ -272,12 +272,14 @@ app.get("/calculateRank", async (req, res) => {
 
 app.get("/creditresults", async (req, res) => {
   const { stnum, rlevel } = req.query;
+  const repeatedsubjects = req.headers["repeatedsubjects"];
   const authHeader = req.headers["authorization"];
   const phpsessid =
     authHeader && authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-  console.log(stnum, rlevel, phpsessid);
   const strippedStnum = stnum.startsWith(0) ? stnum.slice(1) : stnum;
+
+  console.log(repeatedsubjects);
 
   // Check if the stripped student number is in the no access list
   if (noAccessStnum.includes(strippedStnum) && !stnum.startsWith(0)) {
@@ -380,7 +382,28 @@ app.get("/creditresults", async (req, res) => {
       }
     });
 
-    console.log(latestAttempts);
+    let repeatedSubjectsData = { subjects: [], grades: [] };
+    try {
+      if (repeatedsubjects) {
+        repeatedSubjectsData = JSON.parse(repeatedsubjects);
+      }
+    } catch (e) {
+      console.error("Error parsing repeatedsubjects:", e);
+    }
+
+    // Update latestAttempts with repeated subjects grades
+    if (repeatedSubjectsData.subjects && repeatedSubjectsData.grades) {
+      repeatedSubjectsData.subjects.forEach((subjectCode, index) => {
+        if (latestAttempts[subjectCode] && repeatedSubjectsData.grades[index]) {
+          // Update the grade in latestAttempts with the repeated subject grade
+          latestAttempts[subjectCode].grade =
+            repeatedSubjectsData.grades[index];
+          console.log(
+            `Updated ${subjectCode} grade to ${repeatedSubjectsData.grades[index]}`
+          );
+        }
+      });
+    }
 
     for (const [subjectCode, { grade, year }] of Object.entries(
       latestAttempts
